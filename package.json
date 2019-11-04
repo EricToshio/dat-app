@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/EricToshio/dat-app#readme",
   "dependencies": {
+    "commander": "^4.0.0",
     "dat-node": "^3.5.15"
   }
 }

@@ -1,16 +1,15 @@
-var Dat = require('dat-node')
-var fs = require('fs');
+const DatService = require('./services/dat-service') 
+const stdin = process.openStdin();
 
-// Seleciona o diretorio dos dados
-Dat('/game', {temp: true}, function (err, dat) {
-  if (err) throw err
-
-  // Importa todos os dados do diretorio (watch => atualizar)
-  dat.importFiles({watch: true})
-
-  // Compartilha 
-  dat.joinNetwork()
-
-  // Key para acessar dados
-  console.log('dat://' + dat.key.toString('hex'))
-})
+console.log('Bem-vindo ao tic-tac-toe distribuido')
+stdin.addListener("data", async function(input_raw) {
+    const input = input_raw.toString().trim();
+    switch (input){
+        case 'play':
+            let dat = new DatService();
+            console.log( await dat.shareBoard());
+            break;
+        default:
+            console.log('Comando não identificado');
+    }
+});
