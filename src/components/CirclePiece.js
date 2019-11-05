@@ -3,8 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   externalCircle: {
-    width: '100%',
-    height: '100%',
+    width: 'calc(100% - 20px)',
+    height: 'calc(100% - 20px)',
     borderRadius: '50%',
     backgroundColor: 'rgb(242, 235, 211)',
     display: 'flex',
@@ -12,8 +12,8 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
   },
   internalCircle: {
-    height: 'calc(100% - 20px)',
-    width: 'calc(100% - 20px)',
+    height: 'calc(100% - 30px)',
+    width: 'calc(100% - 30px)',
     backgroundColor: '#14bdac',
     borderRadius: '50%',
   },
