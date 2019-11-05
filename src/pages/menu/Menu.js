@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuButton from './../../components/MenuButton';
 import MenuTextField from './../../components/MenuTextField';
+import DatService from '../../services/dat-service';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -52,6 +53,12 @@ const Menu = (props) => {
     setWatchClicked(true);
   }
 
+  const getDat = async () => {
+    let dat = new DatService();
+    let localDat = await dat.shareBoard();
+    console.log("Sua chave de compartilhamento é dat://" + localDat.key.toString('hex'));
+  }
+
   return (
     <>
       <div className={classes.root}>
@@ -59,7 +66,7 @@ const Menu = (props) => {
           <MenuButton onClick={onClickPlay}>
             Play
           </MenuButton>
-          {playClicked && <MenuTextField handleInput={(key)=>console.log(key)}/>}
+          {playClicked && <MenuTextField handleInput={(key)=> getDat()}/>}
           <MenuButton onClick={onWatchClicked}>
             Watch
           </MenuButton>
