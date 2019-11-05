@@ -25,20 +25,21 @@ const useStyles = makeStyles(theme => ({
 
 const Menu = (props) => {
   const classes = useStyles();
-  const [createClicked, setCreateClicked] = useState(false);
+  const [playClicked, setPlayClicked] = useState(false);
   const [joinClicked, setJoinClicked] = useState(false);
   const [watchClicked, setWatchClicked] = useState(false);
+  const [key, setKey] = useState("");
 
   const resetStates = () => {
-    setCreateClicked(false);
+    setPlayClicked(false);
     setJoinClicked(false);
     setWatchClicked(false);
   }
 
-  const onClickCreate = () => {
+  const onClickPlay = () => {
     resetStates();
-    setCreateClicked(true);
-    props.optionClicked();
+    setPlayClicked(true);
+    //props.optionClicked();
   }
 
   const onJoinClicked = () => {
@@ -55,17 +56,14 @@ const Menu = (props) => {
     <>
       <div className={classes.root}>
         <div className={classes.container}>
-          <MenuButton onClick={onClickCreate}>
-            Create
+          <MenuButton onClick={onClickPlay}>
+            Play
           </MenuButton>
-          <MenuButton onClick={onJoinClicked}>
-            Join
-          </MenuButton>
-          {joinClicked && <MenuTextField />}
+          {playClicked && <MenuTextField handleInput={(key)=>console.log(key)}/>}
           <MenuButton onClick={onWatchClicked}>
             Watch
           </MenuButton>
-          {watchClicked && <MenuTextField />}
+          {watchClicked && <MenuTextField handleInput={(key)=>console.log(key)}/>}
         </div>
       </div>
     </>
