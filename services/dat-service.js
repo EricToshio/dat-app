@@ -3,22 +3,26 @@ var Dat = require('dat-node');
 class DatService {
     shareBoard(){ 
             return new Promise(resolve => {
-                Dat('/game', {temp: true}, function (err, dat) {
+                var Dat = require('dat-node');
+                Dat('./game', {temp: true}, function (err, dat) {
                     if (err) throw err
-                    
-                    // Importa todos os dados do diretorio (watch => atualizar ao vivo)
+                    // Importa todos os dados do diretorio (watch => vigia mudanças)
                     dat.importFiles({watch: true});
-                    
                     // Compartilha 
                     dat.joinNetwork();
-    
-                    // Key para acessar dados
-                    resolve('dat://' + dat.key.toString('hex'));
+
+                    resolve(dat);
                 })
             });
         }
-    connectDat(){
-        // TO-DO
+    getBoard(keyEnemy){
+        return new Promise(resolve => {
+            Dat('./game2', { temp:true, key: keyEnemy, sparse: true}, function (err, dat) {
+                if (err) throw err;
+                dat.joinNetwork();
+                resolve(dat);
+            })
+        })
     }
 };
 
