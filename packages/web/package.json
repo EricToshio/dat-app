@@ -1,0 +1,40 @@
+{
+  "name": "@tic-tac-toe/web",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "react-scripts start"
+  },
+  "proxy": "http://localhost:8080",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EricToshio/dat-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EricToshio/dat-app/issues"
+  },
+  "homepage": "https://github.com/EricToshio/dat-app#readme",
+  "dependencies": {
+    "@material-ui/core": "^4.5.2",
+    "@material-ui/icons": "^4.5.1",
+    "classnames": "^2.2.6",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-scripts": "3.2.0",
+    "typeface-roboto": "0.0.75"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
