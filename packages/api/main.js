@@ -1,4 +1,4 @@
-// const DatService = require('./services/dat-service') 
+const DatService = require('./services/dat.service'); 
 // const stdin = process.openStdin();
 
 // // Variáveis globais
@@ -55,6 +55,7 @@
 const express = require('express');
 
 const PORT = process.env.PORT || 8080;
+// const PORT = 8080;
 const app = express();
 
 app.get('/greeting', (req, res) => {
@@ -62,5 +63,20 @@ app.get('/greeting', (req, res) => {
         message: `Hello, ${req.query.name || 'World'}!`
     });
 })
+
+app.get('/create', (req, res) => {
+    DatService.createBoard().then(dat => {
+        const myKey = DatService.getLocalKey();
+        res.send({"key": myKey.toString('hex')});
+    });
+});
+
+app.get('/join', (req, res) => {
+    const oponentDatKey = req.query.key;
+    DatService.loadOponentBoard(`dat://${oponentDatKey}`).then(_ => {
+        DatService.listenToOponentMoves(() => console.log("mudou"));
+    });
+    res.send({"status": "ok"});
+});
 
 app.listen(PORT, () => console.log(`Dat API listening on port ${PORT}!`))
