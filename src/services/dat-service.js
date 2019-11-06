@@ -26,4 +26,6 @@ class DatService {
     }
 };
 
-module.exports = DatService;
+
+
+export default DatService;
