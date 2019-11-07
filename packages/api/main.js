@@ -1,4 +1,6 @@
 const DatService = require('./services/dat.service'); 
+const FileManipulator = require('./services/files.service');
+
 // const stdin = process.openStdin();
 
 // // Variáveis globais
