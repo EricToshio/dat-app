@@ -10,9 +10,11 @@ class FileManipulator {
             console.log("Dat file for oponent doesn't exist. FileManipulator is unable to read.")
             return;
         }
-        const oponentDat = DatService.oponentDat;
-        oponentDat.archive.readFile(OPONENT_BOARD_PATH, function (err, content) {
-            console.log(JSON.parse(content))
+        return new Promise(resolve => {
+            const oponentDat = DatService.oponentDat;
+            oponentDat.archive.readFile(OPONENT_BOARD_PATH, function (err, content) {
+                resolve(JSON.parse(content));
+            });
         });
     }
 
@@ -31,6 +33,23 @@ class FileManipulator {
             });
         });
     }
+
+    // static async getMergedBoards() {
+    //     return new Promise(resolve => {
+    //         const myBoard = await FileManipulator.readBoard();
+    //         const oponentBoard = await FileManipulator.readOponentBoard();
+    //         const mergedBoard = {"board":{}};
+    //         ['1','2','3','4','5','6','7','8','9'].forEach(key => {
+    //             if(myBoard["board"][key] === '' && oponentBoard["board"][key] === '')
+    //                 mergedBoard["board"][key] = '';
+    //             else if(myBoard["board"][key] !== '')
+    //                 mergedBoard["board"][key] = myBoard["board"][key];
+    //             else
+    //                 mergedBoard["board"][key] = oponentBoard["board"][key];
+    //         });
+    //         resolve(mergedBoard);
+    //     });
+    // }
 }
 
 module.exports = FileManipulator;

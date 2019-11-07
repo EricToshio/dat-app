@@ -1,5 +1,6 @@
 const DatService = require('./services/dat.service'); 
-const FileManipulator = require('./services/files.service');
+const GameService = require('./services/game.service');
+const EventService = require('./services/events.service');
 
 // const stdin = process.openStdin();
 
@@ -57,12 +58,11 @@ const FileManipulator = require('./services/files.service');
 const express = require('express');
 
 const PORT = process.env.PORT || 8080;
-// const PORT = 8080;
 const app = express();
 
-app.get('/greeting', (req, res) => {
+app.get('/', (req, res) => {
     res.send({
-        message: `Hello, ${req.query.name || 'World'}!`
+        message: 'Dat API is running'
     });
 })
 
@@ -76,8 +76,13 @@ app.get('/create', (req, res) => {
 app.get('/join', (req, res) => {
     const oponentDatKey = req.query.key;
     DatService.loadOponentBoard(`dat://${oponentDatKey}`).then(_ => {
-        DatService.listenToOponentMoves(() => console.log("mudou"));
+        DatService.listenToOponentMoves(EventService.handleOponentMove);
     });
+    res.send({"status": "ok"});
+});
+
+app.get('/make_move', (req, res) => {
+    GameService.makeMove(req.query.position, req.query.piece);
     res.send({"status": "ok"});
 });
 
