@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import TicTacToeGrid from '../../components/TicTacToeGrid';
+import TicTacToeGrid from './../../components/TicTacToeGrid';
 
 
 const useStyles = makeStyles(theme => ({
