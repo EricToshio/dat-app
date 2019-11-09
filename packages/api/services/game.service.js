@@ -1,4 +1,5 @@
 const FileManipulator = require('./files.service');
+const WebSocketService =require('./websocket.service');
 
 class GameService {
     static async makeMove(position, piece) {
@@ -11,6 +12,7 @@ class GameService {
         const oponentBoard = await FileManipulator.readOponentBoard();
         console.log("oponente fez jogada");
         console.log(oponentBoard);
+        WebSocketService.sendMessage(oponentBoard);
     }
 };
 

@@ -2,6 +2,7 @@ import {
   CHANGE_BOARD_STATE,
   STORE_MY_KEY,
   STORE_OPPONENT_KEY,
+  LOAD_BOARD,
 } from './actions'
 
 const initialState = {
@@ -41,6 +42,12 @@ function todos(state = initialState, action) {
       return {
         ...state,
         opponentKey: opkey,
+      }
+    
+    case LOAD_BOARD:
+      return {
+        ...state,
+        board: action.payload.board,
       }
       
     default:

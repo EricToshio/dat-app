@@ -5,6 +5,7 @@
 export const CHANGE_BOARD_STATE = 'CHANGE_BOARD_STATE';
 export const STORE_MY_KEY = 'STORE_MY_KEY';
 export const STORE_OPPONENT_KEY = 'STORE_OPPONENT_KEY';
+export const LOAD_BOARD = 'LOAD_BOARD';
 /*
  * action creators
  */
@@ -28,4 +29,11 @@ export function storeOpponentKey(payload) {
     type: STORE_OPPONENT_KEY,
     payload,
   };
+}
+
+export function loadBoard(payload) {
+  return {
+    type: LOAD_BOARD,
+    payload,
+  }
 }

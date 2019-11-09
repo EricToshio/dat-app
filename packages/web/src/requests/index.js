@@ -14,7 +14,6 @@ export const createBoard = async () => {
 }
 
 export const joinMatch = async (key) => {
-  console.log(`/join?key=${key}`);
   return new Promise(resolve => {
     axios({
       method: 'get',
@@ -24,5 +23,18 @@ export const joinMatch = async (key) => {
       .then(response => {
         resolve(response.data)
     })
+  });
+}
+
+export const makeMove = async (position, piece) => {
+  return new Promise(resolve => {
+    axios({
+      method: 'get',
+      url: `/make_move?position=${position}&piece=${piece}`,
+      responseType: 'json',
+    })
+      .then(response => {
+        resolve(response.data);
+      })
   });
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import CirclePiece from './CirclePiece';
@@ -53,6 +53,8 @@ const TicTacToeGrid = (props) => {
   const classes = useStyles();
   const { board } = props;
   const [playerCrossTurn, setPlayerCrossTurn] = useState(false);
+
+  useEffect(() => {console.log("update")});
 
   const cellClicked = (item) => {
     props.onPlayerMove(

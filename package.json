@@ -6,5 +6,9 @@
   },
   "scripts": {
     "start": "lerna run start --parallel"
+  },
+  "dependencies": {
+    "websocket": "^1.0.30",
+    "ws": "^7.2.0"
   }
 }
