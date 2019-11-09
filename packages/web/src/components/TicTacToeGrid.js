@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import CirclePiece from './CirclePiece';
 import CrossPiece from './CrossPiece';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
   gridContainer: {
@@ -32,17 +33,15 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const defaultCase = {
-  '1':'',
-  '2':'',
-  '3':'',
-  '4':'',
-  '5':'',
-  '6':'',
-  '7':'',
-  '8':'',
-  '9':'',
+const piecesComponents = {
+  'X': <CrossPiece />,
+  'O': <CirclePiece />,
+  '': <div />,
 };
+
+const convertCharToComponent = (pieceChar) => (
+  piecesComponents[pieceChar]
+);
 
 const cells = ['1','2','3','4','5','6','7','8','9'];
 const withBorderTop = ['4','5','6','7','8','9'];
@@ -52,15 +51,16 @@ const withBorderRight = ['1','2','4','5','7','8'];
 
 const TicTacToeGrid = (props) => {
   const classes = useStyles();
-  const initialPieces = defaultCase;
-  const [pieces, setPieces] = useState(initialPieces);
+  const { board } = props;
   const [playerCrossTurn, setPlayerCrossTurn] = useState(false);
 
   const cellClicked = (item) => {
-    if(pieces[item] !== '') return;
-    const tempPieces = pieces;
-    tempPieces[item] = playerCrossTurn ? <CrossPiece /> : <CirclePiece />;
-    setPieces(tempPieces);
+    props.onPlayerMove(
+      {
+        position: item,
+        piece: playerCrossTurn ? "X" : "O",
+      }
+    );
     setPlayerCrossTurn(!playerCrossTurn);
   };
 
@@ -77,11 +77,20 @@ const TicTacToeGrid = (props) => {
           })}
           onClick={() => cellClicked(item)}
         >
-          {pieces[item]}
+          {convertCharToComponent(board[item])}
         </div>
       ))}
     </div>
   );
 };
 
-export default TicTacToeGrid;
+const mapStateToProps = state => {
+  return {
+    board: state.board,
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  null,
+)(TicTacToeGrid);

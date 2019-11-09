@@ -1,7 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TicTacToeGrid from './../../components/TicTacToeGrid';
-
+import { connect } from 'react-redux';
+import { changeBoardState } from './../../store/actions';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,14 +20,34 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Playground = (props) => {
+  console.log(props);
   const classes = useStyles();
+  const onPlayerMove = (move) => {
+    console.log("chamou");
+    props.changeBoardState(move);
+  }
   return (
     <div className={classes.root}>
       <div className={classes.container}>
-        <TicTacToeGrid></TicTacToeGrid>
+        <TicTacToeGrid
+          onPlayerMove={onPlayerMove}
+        />
       </div>
     </div>
   );
 };
 
-export default Playground;
+const mapStateToProps = state => {
+  return {
+    board: state.board,
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  changeBoardState: move => dispatch(changeBoardState(move))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Playground);
