@@ -36,10 +36,11 @@ const Menu = (props) => {
     setWatchClicked(false);
   }
 
-  const onClickPlay = () => {
+  const onClickPlay = async () => {
     resetStates();
     setPlayClicked(true);
     props.optionClicked();
+    
   }
 
   const onJoinClicked = () => {

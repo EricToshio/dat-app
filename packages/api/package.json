@@ -17,6 +17,7 @@
   "homepage": "https://github.com/EricToshio/dat-app#readme",
   "dependencies": {
     "commander": "^4.0.0",
+    "cors": "^2.8.5",
     "dat-node": "^3.5.15",
     "express": "^4.17.1"
   }

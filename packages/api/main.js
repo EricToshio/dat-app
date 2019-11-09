@@ -2,6 +2,13 @@ const DatService = require('./services/dat.service');
 const GameService = require('./services/game.service');
 const EventService = require('./services/events.service');
 
+var cors = require('cors')
+
+var corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
 // const stdin = process.openStdin();
 
 // // Variáveis globais
@@ -57,8 +64,10 @@ const EventService = require('./services/events.service');
 
 const express = require('express');
 
-const PORT = process.env.PORT || 8080;
+// const PORT = Number(process.env.PORT) + 1 || 8080;
+const PORT = 8080;
 const app = express();
+// app.use(cors())
 
 app.get('/', (req, res) => {
     res.send({
@@ -75,6 +84,7 @@ app.get('/create', (req, res) => {
 
 app.get('/join', (req, res) => {
     const oponentDatKey = req.query.key;
+    console.log(oponentDatKey);
     DatService.loadOponentBoard(`dat://${oponentDatKey}`).then(_ => {
         DatService.listenToOponentMoves(EventService.handleOponentMove);
     });

@@ -40,6 +40,7 @@ const Playground = (props) => {
 const mapStateToProps = state => {
   return {
     board: state.board,
+    myKey: state.myKey,
   }
 }
 

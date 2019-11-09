@@ -2,25 +2,30 @@
  * action types
  */
 
-export const ADD_TODO = 'ADD_TODO'
-export const TOGGLE_TODO = 'TOGGLE_TODO'
 export const CHANGE_BOARD_STATE = 'CHANGE_BOARD_STATE';
-
+export const STORE_MY_KEY = 'STORE_MY_KEY';
+export const STORE_OPPONENT_KEY = 'STORE_OPPONENT_KEY';
 /*
  * action creators
  */
 
-export function addTodo(text) {
-  return { type: ADD_TODO, text }
-}
-
-export function toggleTodo(index) {
-  return { type: TOGGLE_TODO, index }
-}
-
 export function changeBoardState(payload) {
-    return {
-        type: CHANGE_BOARD_STATE,
-        payload,
-    };
+  return {
+    type: CHANGE_BOARD_STATE,
+    payload,
+  };
+}
+
+export function storeMyKey(payload) {
+  return {
+    type: STORE_MY_KEY,
+    payload,
+  };
+}
+
+export function storeOpponentKey(payload) {
+  return {
+    type: STORE_OPPONENT_KEY,
+    payload,
+  };
 }
