@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import Zoom from 'react-reveal/Zoom';
 
 const useStyles = makeStyles(theme => ({
   externalCircle: {
@@ -22,9 +23,11 @@ const useStyles = makeStyles(theme => ({
 const CirclePiece = (props) => {
   const classes = useStyles();
   return (
-    <div className={classes.externalCircle}>
-      <div className={classes.internalCircle} />
-    </div>
+    <Zoom>
+      <div className={classes.externalCircle}>
+        <div className={classes.internalCircle} />
+      </div>
+    </Zoom>
   );
 };
 

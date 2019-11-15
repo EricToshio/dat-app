@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import Zoom from 'react-reveal/Zoom';
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -27,10 +28,12 @@ const useStyles = makeStyles(theme => ({
 const CrossPiece = (props) => {
   const classes = useStyles();
   return (
-    <div className={classes.wrapper}>
-      <div className={classes.firstArm} />
-      <div className={classes.secondArm} />
-    </div>
+    <Zoom>
+      <div className={classes.wrapper}>
+        <div className={classes.firstArm} />
+        <div className={classes.secondArm} />
+      </div>
+    </Zoom>
   );
 };
 
