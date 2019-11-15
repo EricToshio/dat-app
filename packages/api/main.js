@@ -42,8 +42,8 @@ app.get('/join', (req, res) => {
     const oponentDatKey = req.query.key;
     DatService.loadOponentBoard(`dat://${oponentDatKey}`).then(_ => {
         DatService.listenToOponentMoves(EventService.handleOponentMove);
+        res.send({"status": "ok"});
     });
-    res.send({"status": "ok"});
 });
 
 app.get('/make_move', (req, res) => {

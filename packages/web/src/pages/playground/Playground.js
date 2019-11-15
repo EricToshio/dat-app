@@ -6,6 +6,7 @@ import {
   changeBoardState,
   loadBoard,
 } from './../../store/actions';
+import { makeMove } from './../../requests';
 
 // const WebSocket = require('ws');
 
@@ -50,6 +51,8 @@ const Playground = (props) => {
 
   const onPlayerMove = (move) => {
     props.changeBoardState(move);
+    const { position, piece } = move;
+    makeMove(position, piece);
   }
 
   return (
