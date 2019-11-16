@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import MenuButton from './../../components/MenuButton';
-import MenuTextField from './../../components/MenuTextField';
-import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import CopyToClipboard from '../../components/CopyToClipboard';
-import { storeOpponentKey } from '../../store/actions';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -43,18 +38,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const CreatePage = (props) => {
+const WatchPage = (props) => {
   const classes = useStyles();
-  const [opKey, setOpKey] = useState("");
 
   const handleChange = (e) => {
     const value = e.target.value;
-    setOpKey(value);
   }
 
   const onClick = () => {
-    props.storeOpponentKey(opKey);
-    props.onClickStart(opKey);
   }
 
   return (
@@ -63,28 +54,7 @@ const CreatePage = (props) => {
         <div className={classes.container}>
           <div className={classes.inputRow}>
             <TextField
-              label=""
-              variant="outlined"
-              value={props.myKey}
-              disabled
-              className={classes.textField}
-            />
-            <CopyToClipboard>
-              {({ copy }) => (
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  className={classes.button}
-                  onClick={() => copy(props.myKey)}
-                >
-                  Copy
-                </Button>
-              )}
-            </CopyToClipboard>
-          </div>
-          <div className={classes.inputRow}>
-            <TextField
-              label="Opponent Key"
+              label="Watch key"
               variant="outlined"
               className={classes.textField}
               onChange={handleChange}
@@ -95,7 +65,7 @@ const CreatePage = (props) => {
               onClick={onClick}
               className={classes.button}
             >
-              Start
+              Watch
             </Button>
           </div>
         </div>
@@ -104,21 +74,4 @@ const CreatePage = (props) => {
   );
 };
 
-const mapStateToProps = state => {
-  console.log(state);
-  return {
-    myKey: state.myKey,
-    opponentKey: state.opponentKey,
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    storeOpponentKey: key => dispatch(storeOpponentKey(key)),
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(CreatePage);
+export default WatchPage;

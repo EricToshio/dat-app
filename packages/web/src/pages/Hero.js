@@ -5,7 +5,6 @@ import Playground from './playground/Playground';
 import { createBoard, joinMatch } from './../requests';
 import { connect } from 'react-redux';
 import { storeMyKey } from '../store/actions';
-import CreatePage from './menu/CreatePage';
 
 const useStyles = makeStyles(theme => ({}));
 
@@ -13,23 +12,25 @@ const Hero = (props) => {
   const [page, setPage] = useState('menu');
 
   
-  const optionClicked = async () => {
-    setPage('create');
+  const playButtonClicked = async () => {
     const response = await createBoard();
     props.storeMyKey(response);
   };
 
   const handleOpponentKey = async (key) => {
-    const response = await joinMatch(key);
-    console.log(response);
+    await joinMatch(key);
     setPage('playground');
   };
 
   return (
     <>
-      {page === 'menu' && <Menu optionClicked={optionClicked} />}
+      {page === 'menu' && 
+        <Menu
+          playButtonClicked={playButtonClicked}
+          startButtonClicked={handleOpponentKey}
+        />
+      }
       {page === 'playground' && <Playground />}
-      {page === 'create' && <CreatePage handleOpponentKey={handleOpponentKey} />}
     </>
   );
 };
