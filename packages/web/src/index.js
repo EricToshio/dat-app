@@ -12,7 +12,7 @@ const store = createStore(todo)
 
 ReactDOM.render(
     <Provider store={store}>
-        <Hero />,
+        <Hero />
     </Provider>,
     document.getElementById('root')
 );

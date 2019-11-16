@@ -11,6 +11,7 @@ const useStyles = makeStyles(theme => ({
     gridTemplateColumns: 'auto auto auto',
     width: '600px',
     height: '600px',
+    transform: 'translateX(-10px)',
   },
   gridItem: {
     height: '200px',

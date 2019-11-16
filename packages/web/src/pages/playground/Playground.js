@@ -7,12 +7,11 @@ import {
   loadBoard,
 } from './../../store/actions';
 import { makeMove } from './../../requests';
-
-// const WebSocket = require('ws');
+import Header from './Header';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    height: '100vh',
+    height: 'calc(100vh - 70px)',
     width: '100vw',
     backgroundColor: '#14bdac',
   },
@@ -56,13 +55,16 @@ const Playground = (props) => {
   }
 
   return (
-    <div className={classes.root}>
-      <div className={classes.container}>
-        <TicTacToeGrid
-          onPlayerMove={onPlayerMove}
-        />
+    <>
+      <Header />
+      <div className={classes.root}>
+        <div className={classes.container}>
+          <TicTacToeGrid
+            onPlayerMove={onPlayerMove}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
