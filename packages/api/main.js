@@ -34,6 +34,7 @@ app.get('/', (req, res) => {
 app.get('/create', (req, res) => {
     DatService.createBoard().then(dat => {
         const myKey = DatService.getLocalKey();
+        GameService.clearBoard();
         res.send({"key": myKey.toString('hex')});
     });
 });

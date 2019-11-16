@@ -21,6 +21,13 @@ class GameService {
         console.log(mergeBoard);
         WebSocketService.sendMessage(mergeBoard);
     }
+
+    static async clearBoard() {
+        const myBoard = await FileManipulator.readBoard();
+
+        ['1','2','3','4','5','6','7','8','9'].forEach(position => myBoard.board[position] = '');
+        FileManipulator.writeBoard(myBoard);
+    }
 };
 
 module.exports = GameService;
