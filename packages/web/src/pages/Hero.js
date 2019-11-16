@@ -24,14 +24,13 @@ const Hero = (props) => {
 
   return (
     <>
-      {/* {page === 'menu' && 
+      {page === 'menu' && 
         <Menu
           playButtonClicked={playButtonClicked}
           startButtonClicked={handleOpponentKey}
         />
       }
-      {page === 'playground' && <Playground />} */}
-      <Playground />
+      {page === 'playground' && <Playground />}
     </>
   );
 };
