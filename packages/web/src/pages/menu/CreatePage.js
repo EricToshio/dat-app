@@ -30,6 +30,7 @@ const useStyles = makeStyles(theme => ({
     width: '400px',
     display: 'flex',
     backgroundColor: '#FFF',
+    borderRadius: '4px',
   },
   inputRow: {
     display: 'flex',
