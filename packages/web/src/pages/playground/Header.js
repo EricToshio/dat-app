@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuButton from '../../components/MenuButton';
+import Button from '@material-ui/core/Button';
+import CopyToClipboard from '../../components/CopyToClipboard';
 import TextField from '@material-ui/core/TextField';
 import { encodeKeys } from '../../utils';
 
@@ -17,11 +19,25 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Header = async (props) => {
+const Header = (props) => {
   const classes = useStyles();
-  const sharedKey = await encodeKeys(props.myKey,props.opponentKey);
+  const [sharedKey, setSharedKey] = useState("");
+
+  encodeKeys(props.myKey,props.opponentKey).then((share)=>setSharedKey(share));
   return (
     <div className={classes.root}>
+      <CopyToClipboard>
+        {({ copy }) => (
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.button}
+            onClick={() => copy(sharedKey)}
+          >
+            Copy
+          </Button>
+        )}
+      </CopyToClipboard>
       <TextField
         label=""
         variant="outlined"
