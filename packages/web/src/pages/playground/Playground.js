@@ -54,6 +54,7 @@ const Playground = (props) => {
     const resp = await makeMove(position, piece);
     if (resp.status == "ok"){
       props.changeBoardState(move);
+      setReload((reload + 1) % 2);
     }else{
       console.log("nao e seu turno");
     }
