@@ -8,7 +8,7 @@ const express = require('express');
 const ws = require('ws');
 const http = require('http');
 
-// const PORT = Number(process.env.PORT) + 1 || 8080;
+//const PORT = Number(process.env.PORT) + 1 || 8080;
 const PORT = 8080;
 const app = express();
 app.use(cors());
@@ -43,13 +43,14 @@ app.get('/join', (req, res) => {
     const oponentDatKey = req.query.key;
     DatService.loadOponentBoard(`dat://${oponentDatKey}`).then(_ => {
         DatService.listenToOponentMoves(EventService.handleOponentMove);
+        GameService.SetUpSeqNum(DatService.getLocalKey().toString('hex')<oponentDatKey);
         res.send({"status": "ok"});
     });
 });
 
-app.get('/make_move', (req, res) => {
-    GameService.makeMove(req.query.position, req.query.piece);
-    res.send({"status": "ok"});
+app.get('/make_move', async (req, res) => {
+    const result = await GameService.makeMove(req.query.position, req.query.piece);
+    res.send({"status": result});
 });
 
 // app.listen(PORT, () => console.log(`Dat API listening on port ${PORT}!`))

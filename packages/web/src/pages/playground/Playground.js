@@ -48,10 +48,16 @@ const Playground = (props) => {
     }
   }, []);
 
-  const onPlayerMove = (move) => {
-    props.changeBoardState(move);
+  const onPlayerMove = async (move) => {
+    
     const { position, piece } = move;
-    makeMove(position, piece);
+    const resp = await makeMove(position, piece);
+    if (resp.status == "ok"){
+      props.changeBoardState(move);
+      setReload((reload + 1) % 2);
+    }else{
+      console.log("nao e seu turno");
+    }
   }
 
   return (
