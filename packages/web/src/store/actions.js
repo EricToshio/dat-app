@@ -6,6 +6,7 @@ export const CHANGE_BOARD_STATE = 'CHANGE_BOARD_STATE';
 export const STORE_MY_KEY = 'STORE_MY_KEY';
 export const STORE_OPPONENT_KEY = 'STORE_OPPONENT_KEY';
 export const LOAD_BOARD = 'LOAD_BOARD';
+export const SET_WATCH_MODE = 'SET_WATCH_MODE';
 /*
  * action creators
  */
@@ -34,6 +35,13 @@ export function storeOpponentKey(payload) {
 export function loadBoard(payload) {
   return {
     type: LOAD_BOARD,
+    payload,
+  }
+}
+
+export function setWatchMode(payload) {
+  return {
+    type: SET_WATCH_MODE,
     payload,
   }
 }

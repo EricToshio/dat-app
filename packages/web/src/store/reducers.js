@@ -3,6 +3,7 @@ import {
   STORE_MY_KEY,
   STORE_OPPONENT_KEY,
   LOAD_BOARD,
+  SET_WATCH_MODE,
 } from './actions'
 
 const initialState = {
@@ -19,6 +20,7 @@ const initialState = {
   },
   myKey: null,
   opponentKey: null,
+  isWatchMode: false,
 }
 
 function todos(state = initialState, action) {
@@ -48,6 +50,12 @@ function todos(state = initialState, action) {
       return {
         ...state,
         board: action.payload.board,
+      }
+    
+    case SET_WATCH_MODE:
+      return {
+        ...state,
+        isWatchMode: action.payload,
       }
       
     default:
