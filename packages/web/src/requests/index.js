@@ -26,6 +26,20 @@ export const joinMatch = async (key) => {
   });
 }
 
+export const WatchMatch = async (keys) => {
+  return new Promise(resolve => {
+    axios({
+      method: 'get',
+      url: `/watch?key1=${keys[0]}&key2=${keys[1]}`,
+      responseType: 'json',
+    })
+      .then(response => {
+        resolve(response.data)
+    })
+  });
+}
+
+
 export const makeMove = async (position, piece) => {
   return new Promise(resolve => {
     axios({

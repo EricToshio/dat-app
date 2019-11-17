@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Menu from './menu/Menu';
 import Playground from './playground/Playground';
-import { createBoard, joinMatch } from './../requests';
+import { createBoard, joinMatch, WatchMatch } from './../requests';
 import { connect } from 'react-redux';
 import { storeMyKey } from '../store/actions';
 
@@ -21,6 +21,11 @@ const Hero = (props) => {
     await joinMatch(key);
     setPage('playground');
   };
+  const handleShareKey = async (keys) => {
+    console.log(keys)
+    //await WatchMatch(keys);
+    //setPage('playground');
+  };
 
   return (
     <>
@@ -28,6 +33,7 @@ const Hero = (props) => {
         <Menu
           playButtonClicked={playButtonClicked}
           startButtonClicked={handleOpponentKey}
+          watchButtonClicked={handleShareKey}
         />
       }
       {page === 'playground' && <Playground />}

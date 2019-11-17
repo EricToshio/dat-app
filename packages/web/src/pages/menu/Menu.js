@@ -80,6 +80,10 @@ const Menu = (props) => {
     props.startButtonClicked(opponentKey);
   }
 
+  const onClickWatchKeys = (keys) => {
+    props.watchButtonClicked(keys);
+  }
+
   return (
     <>
       <div className={classes.root}>
@@ -116,7 +120,7 @@ const Menu = (props) => {
         >
           
           {playClicked && <CreatePage onClickStart={onClickStart} />}
-          {watchClicked && <WatchPage />}
+          {watchClicked && <WatchPage onClickWatch={onClickWatchKeys} />}
         </div>
       </div>
     </>
