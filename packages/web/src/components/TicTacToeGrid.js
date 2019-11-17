@@ -40,11 +40,7 @@ const piecesComponents = {
   '': <div />,
 };
 
-const convertCharToComponent = (pieceChar) => (
-  piecesComponents[pieceChar]
-);
-
- 
+const convertCharToComponent = pieceChar => piecesComponents[pieceChar];
 
 const cells = ['1','2','3','4','5','6','7','8','9'];
 const withBorderTop = ['4','5','6','7','8','9'];
@@ -78,6 +74,7 @@ const TicTacToeGrid = (props) => {
   };
 
   const cellClicked = (item) => {
+    if (isCellFilled(item)) return;
     props.onPlayerMove(
       {
         position: item,
@@ -86,6 +83,10 @@ const TicTacToeGrid = (props) => {
     );
     setPlayerCrossTurn(!playerCrossTurn);
   };
+
+  const isCellFilled = (item) => {
+    return board[item] !== '';
+  }
 
   return (
     <div className={classes.gridContainer}>
