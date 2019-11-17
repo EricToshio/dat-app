@@ -4,13 +4,22 @@ const gameUtils = require('./../utils/game.utils');
 
 class GameService {
     static async makeMove(position, piece) {
-        console.log("voce fez um movimento");
-        const myBoard = await FileManipulator.readBoard();
-        const opponentBoard = await FileManipulator.readOponentBoard();
-        const mergedBoard = gameUtils.mergeBoards(myBoard, opponentBoard);
-
-        mergedBoard["board"][position] = piece;
-        FileManipulator.writeBoard(mergedBoard);
+        return new Promise(async resolve => {
+            const myBoard = await FileManipulator.readBoard();
+            const opponentBoard = await FileManipulator.readOponentBoard();
+            console.log("Seu seq",myBoard.seq,"adversario",opponentBoard.seq);
+            if (myBoard.seq < opponentBoard.seq){
+                console.log("voce fez um movimento");
+                const mergedBoard = gameUtils.mergeBoards(myBoard, opponentBoard);
+                mergedBoard["board"][position] = piece;
+                mergedBoard["seq"] = myBoard.seq +2;
+                FileManipulator.writeBoard(mergedBoard);
+                resolve("ok");
+            }else{
+                console.log("nao eh a sua vez de jogar");
+                resolve("not your turn");
+            }
+        });
     }
 
     static async oponentMadeMove() {
@@ -24,8 +33,18 @@ class GameService {
 
     static async clearBoard() {
         const myBoard = await FileManipulator.readBoard();
-
         ['1','2','3','4','5','6','7','8','9'].forEach(position => myBoard.board[position] = '');
+        myBoard.seq = null;
+        FileManipulator.writeBoard(myBoard);
+    }
+
+    static async SetUpSeqNum(has_preference){
+        const myBoard = await FileManipulator.readBoard();
+        if(has_preference){
+            myBoard.seq = 1;
+        }else{
+            myBoard.seq = 2;
+        }
         FileManipulator.writeBoard(myBoard);
     }
 };
