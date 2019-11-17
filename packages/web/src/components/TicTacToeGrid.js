@@ -44,6 +44,8 @@ const convertCharToComponent = (pieceChar) => (
   piecesComponents[pieceChar]
 );
 
+ 
+
 const cells = ['1','2','3','4','5','6','7','8','9'];
 const withBorderTop = ['4','5','6','7','8','9'];
 const withBorderLeft = ['2','3','5','6','8','9'];
@@ -57,11 +59,29 @@ const TicTacToeGrid = (props) => {
 
   useEffect(() => {console.log("update")});
 
+  const nextPiece = () => {
+    var numX = 0;
+    var numO = 0;
+    for (var pos in props.board){
+      if (props.board[pos] == "X"){
+        numX = numX + 1
+      }
+      if (props.board[pos] == "O"){
+        numO = numO + 1
+      }
+    }
+    if (numX <= numO){
+      return "X"
+    }else{
+      return "O"
+    }
+  };
+
   const cellClicked = (item) => {
     props.onPlayerMove(
       {
         position: item,
-        piece: playerCrossTurn ? "X" : "O",
+        piece: nextPiece(),
       }
     );
     setPlayerCrossTurn(!playerCrossTurn);
