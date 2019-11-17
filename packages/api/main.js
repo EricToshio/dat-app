@@ -8,8 +8,8 @@ const express = require('express');
 const ws = require('ws');
 const http = require('http');
 
-const PORT = Number(process.env.PORT) + 1 || 8080;
-//const PORT = 8080;
+//const PORT = Number(process.env.PORT) + 1 || 8080;
+const PORT = 8080;
 const app = express();
 app.use(cors());
 
