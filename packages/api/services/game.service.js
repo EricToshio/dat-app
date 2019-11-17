@@ -31,6 +31,15 @@ class GameService {
         WebSocketService.sendMessage(mergeBoard);
     }
 
+    static async watchMadeMove() {
+        const watchBoard1 = await FileManipulator.readWatchBoard1();
+        const watchBoard2 = await FileManipulator.readWatchBoard2();
+        const mergeBoard = gameUtils.mergeBoards(watchBoard1, watchBoard2);
+        console.log("alguem fez jogada");
+        console.log(mergeBoard);
+        WebSocketService.sendMessage(mergeBoard);
+    }
+
     static async clearBoard() {
         const myBoard = await FileManipulator.readBoard();
         ['1','2','3','4','5','6','7','8','9'].forEach(position => myBoard.board[position] = '');

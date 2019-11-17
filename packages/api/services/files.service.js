@@ -18,6 +18,32 @@ class FileManipulator {
         });
     }
 
+    static readWatchBoard1() {
+        if(!DatService.watchDat1){
+            console.log("Dat file for oponent doesn't exist. FileManipulator is unable to read.")
+            return;
+        }
+        return new Promise(resolve => {
+            const watchDat1 = DatService.watchDat1;
+            watchDat1.archive.readFile(OPONENT_BOARD_PATH, function (err, content) {
+                resolve(JSON.parse(content));
+            });
+        });
+    }
+
+    static readWatchBoard2() {
+        if(!DatService.watchDat2){
+            console.log("Dat file for oponent doesn't exist. FileManipulator is unable to read.")
+            return;
+        }
+        return new Promise(resolve => {
+            const watchDat2 = DatService.watchDat2;
+            watchDat2.archive.readFile(OPONENT_BOARD_PATH, function (err, content) {
+                resolve(JSON.parse(content));
+            });
+        });
+    }
+
     static writeBoard(newBoard) {
         const newBoardString = JSON.stringify(newBoard);
         fs.writeFile(BOARD_PATH, newBoardString, function(err) {

@@ -53,5 +53,18 @@ app.get('/make_move', async (req, res) => {
     res.send({"status": result});
 });
 
+app.get('/watch', (req, res) => {
+    const datKey1 = req.query.key1;
+    const datKey2 = req.query.key2;
+    DatService.loadWatchBoard1(`dat://${datKey1}`).then(_ => {
+        DatService.listenToWatchMoves1(EventService.handleWatchMove);
+        DatService.loadWatchBoard2(`dat://${datKey2}`).then(_ => {
+            DatService.listenToWatchMoves2(EventService.handleWatchMove);
+            res.send({"status": "ok"});
+        });
+    });
+    
+});
+
 // app.listen(PORT, () => console.log(`Dat API listening on port ${PORT}!`))
 server.listen(PORT, () => console.log(`Dat API listening on port ${PORT}!`));
