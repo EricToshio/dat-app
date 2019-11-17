@@ -59,23 +59,6 @@ class FileManipulator {
             });
         });
     }
-
-    // static async getMergedBoards() {
-    //     return new Promise(resolve => {
-    //         const myBoard = await FileManipulator.readBoard();
-    //         const oponentBoard = await FileManipulator.readOponentBoard();
-    //         const mergedBoard = {"board":{}};
-    //         ['1','2','3','4','5','6','7','8','9'].forEach(key => {
-    //             if(myBoard["board"][key] === '' && oponentBoard["board"][key] === '')
-    //                 mergedBoard["board"][key] = '';
-    //             else if(myBoard["board"][key] !== '')
-    //                 mergedBoard["board"][key] = myBoard["board"][key];
-    //             else
-    //                 mergedBoard["board"][key] = oponentBoard["board"][key];
-    //         });
-    //         resolve(mergedBoard);
-    //     });
-    // }
 }
 
 module.exports = FileManipulator;
