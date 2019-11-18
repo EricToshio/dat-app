@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { decodeKeys } from '../../utils';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -50,10 +49,7 @@ const WatchPage = (props) => {
   }
 
   const onClick = () => {
-    decodeKeys(shareKey).then((keys) => {
-      //storeKeys?
-      props.onClickWatch(keys);
-    });
+    props.onClickWatch(shareKey);
   }
 
   return (

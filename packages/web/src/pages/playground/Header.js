@@ -5,7 +5,6 @@ import MenuButton from '../../components/MenuButton';
 import Button from '@material-ui/core/Button';
 import CopyToClipboard from '../../components/CopyToClipboard';
 import TextField from '@material-ui/core/TextField';
-import { encodeKeys } from '../../utils';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,9 +20,8 @@ const useStyles = makeStyles(theme => ({
 
 const Header = (props) => {
   const classes = useStyles();
-  const [sharedKey, setSharedKey] = useState("");
+  const { shareKey } = props;
 
-  encodeKeys(props.myKey,props.opponentKey).then((share)=>setSharedKey(share));
   return (
     <div className={classes.root}>
       <CopyToClipboard>
@@ -32,7 +30,7 @@ const Header = (props) => {
             variant="outlined"
             color="primary"
             className={classes.button}
-            onClick={() => copy(sharedKey)}
+            onClick={() => copy(shareKey)}
           >
             Copy
           </Button>
@@ -41,7 +39,7 @@ const Header = (props) => {
       <TextField
         label=""
         variant="outlined"
-        value={sharedKey}
+        value={shareKey}
         disabled
         className={classes.textField}
       />
@@ -52,8 +50,7 @@ const Header = (props) => {
 
 const mapStateToProps = state => {
   return {
-    myKey: state.myKey,
-    opponentKey: state.opponentKey,    
+    shareKey: state.shareKey,    
   }
 }
 

@@ -4,6 +4,7 @@ import {
   STORE_OPPONENT_KEY,
   LOAD_BOARD,
   SET_WATCH_MODE,
+  SET_SHARE_KEY,
 } from './actions'
 
 const initialState = {
@@ -21,6 +22,7 @@ const initialState = {
   myKey: null,
   opponentKey: null,
   isWatchMode: false,
+  shareKey: null,
 }
 
 function todos(state = initialState, action) {
@@ -56,6 +58,12 @@ function todos(state = initialState, action) {
       return {
         ...state,
         isWatchMode: action.payload,
+      }
+    
+    case SET_SHARE_KEY:
+      return {
+        ...state,
+        shareKey: action.payload,
       }
       
     default:

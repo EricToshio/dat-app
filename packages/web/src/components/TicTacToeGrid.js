@@ -53,8 +53,6 @@ const TicTacToeGrid = (props) => {
   const { board } = props;
   const [playerCrossTurn, setPlayerCrossTurn] = useState(false);
 
-  useEffect(() => {console.log("update")});
-
   const nextPiece = () => {
     var numX = 0;
     var numO = 0;
@@ -74,7 +72,10 @@ const TicTacToeGrid = (props) => {
   };
 
   const cellClicked = (item) => {
-    if (isCellFilled(item)) return;
+    if (isCellFilled(item) || props.isWatchMode) {
+      console.log("nao pode clicar", props.isWatchMode);
+      return;
+    }
     props.onPlayerMove(
       {
         position: item,
@@ -109,8 +110,10 @@ const TicTacToeGrid = (props) => {
 };
 
 const mapStateToProps = state => {
+  console.log("state",state);
   return {
     board: state.board,
+    isWatchMode: state.isWatchMode,
   }
 }
 

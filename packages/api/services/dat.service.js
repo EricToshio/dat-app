@@ -48,6 +48,10 @@ class DatService {
         })
     }
 
+    getOpponentKey() {
+        return this.oponentDat ? this.oponentDat.key : null;
+    }
+
     listenToOponentMoves(listener) {
         if(this.someoneIsListeningOponent) return;
         this.oponentDat.trackStats().on('update', listener);

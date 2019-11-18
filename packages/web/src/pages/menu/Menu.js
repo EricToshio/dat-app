@@ -80,8 +80,8 @@ const Menu = (props) => {
     props.startButtonClicked(opponentKey);
   }
 
-  const onClickWatchKeys = (keys) => {
-    props.watchButtonClicked(keys);
+  const onClickWatchKeys = (shareKey) => {
+    props.watchButtonClicked(shareKey);
   }
 
   return (

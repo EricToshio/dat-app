@@ -2,9 +2,18 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Menu from './menu/Menu';
 import Playground from './playground/Playground';
-import { createBoard, joinMatch, WatchMatch } from './../requests';
+import {
+  createBoard,
+  joinMatch,
+  watchMatch,
+  getShareKey,
+} from './../requests';
 import { connect } from 'react-redux';
-import { storeMyKey } from '../store/actions';
+import {
+  storeMyKey,
+  setWatchMode,
+  setShareKey,
+} from '../store/actions';
 
 const useStyles = makeStyles(theme => ({}));
 
@@ -20,11 +29,18 @@ const Hero = (props) => {
   const handleOpponentKey = async (key) => {
     await joinMatch(key);
     setPage('playground');
+    getShareKey().then(responseData => {
+      const { shareKey } = responseData;
+      props.setShareKey(shareKey);
+    })
   };
-  const handleShareKey = async (keys) => {
-    console.log(keys)
-    //await WatchMatch(keys);
-    //setPage('playground');
+
+  const handleShareKey = async (shareKey) => {
+    console.log("sua chave de compartilhamento: ", shareKey);
+    await watchMatch(shareKey);
+    setPage('playground');
+    props.setWatchMode(true);
+    props.setShareKey(shareKey);
   };
 
   return (
@@ -42,7 +58,9 @@ const Hero = (props) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  storeMyKey: response => dispatch(storeMyKey(response))
+  storeMyKey: response => dispatch(storeMyKey(response)),
+  setWatchMode: watch => dispatch(setWatchMode(watch)),
+  setShareKey: shareKey => dispatch(setShareKey(shareKey)),
 });
 
 const mapStateToProps = state => ({
