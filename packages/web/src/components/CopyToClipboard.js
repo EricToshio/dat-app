@@ -17,7 +17,7 @@ const CopyToClipboard = (props) => {
   return (
     <Tooltip
       open={showTooltip}
-      title={"Copied to clipboard!"}
+      title={"Key copied to clipboard!"}
       leaveDelay={1500}
       onClose={handleOnTooltipClose}
       {...props.TooltipProps || {}}

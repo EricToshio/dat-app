@@ -20,7 +20,6 @@ const useStyles = makeStyles(theme => ({}));
 const Hero = (props) => {
   const [page, setPage] = useState('menu');
 
-  
   const playButtonClicked = async () => {
     const response = await createBoard();
     props.storeMyKey(response);
@@ -36,7 +35,6 @@ const Hero = (props) => {
   };
 
   const handleShareKey = async (shareKey) => {
-    console.log("sua chave de compartilhamento: ", shareKey);
     await watchMatch(shareKey);
     setPage('playground');
     props.setWatchMode(true);

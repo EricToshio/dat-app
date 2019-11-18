@@ -110,7 +110,6 @@ const TicTacToeGrid = (props) => {
 };
 
 const mapStateToProps = state => {
-  console.log("state",state);
   return {
     board: state.board,
     isWatchMode: state.isWatchMode,

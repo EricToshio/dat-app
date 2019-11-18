@@ -44,14 +44,11 @@ const useStyles = makeStyles(theme => ({
 const Menu = (props) => {
   const classes = useStyles();
   const [playClicked, setPlayClicked] = useState(false);
-  const [joinClicked, setJoinClicked] = useState(false);
   const [watchClicked, setWatchClicked] = useState(false);
-  const [key, setKey] = useState("");
   const [isMenuCollapsed, setMenuCollapsed] = useState(false);
 
   const resetStates = () => {
     setPlayClicked(false);
-    setJoinClicked(false);
     setWatchClicked(false);
   }
 

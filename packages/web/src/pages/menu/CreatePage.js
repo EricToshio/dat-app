@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import MenuButton from './../../components/MenuButton';
-import MenuTextField from './../../components/MenuTextField';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -106,7 +104,6 @@ const CreatePage = (props) => {
 };
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     myKey: state.myKey,
     opponentKey: state.opponentKey,
