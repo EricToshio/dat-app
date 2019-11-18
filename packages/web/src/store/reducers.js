@@ -25,7 +25,7 @@ const initialState = {
   shareKey: null,
 }
 
-function todos(state = initialState, action) {
+function gameState(state = initialState, action) {
   switch (action.type) {
     case CHANGE_BOARD_STATE:
       const { position, piece } = action.payload;
@@ -71,4 +71,4 @@ function todos(state = initialState, action) {
   }
 }
 
-export default todos
+export default gameState
