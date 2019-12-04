@@ -32,7 +32,7 @@ class DatService {
     }
 
     getLocalKey() {
-        return this.localDat ? this.localDat.key : null;
+        return this.localDat ? this.localDat.key.toString('hex') : null;
     }
 
     loadOponentBoard(keyEnemy){
@@ -49,7 +49,7 @@ class DatService {
     }
 
     getOpponentKey() {
-        return this.oponentDat ? this.oponentDat.key : null;
+        return this.oponentDat ? this.oponentDat.key.toString('hex') : null;
     }
 
     listenToOponentMoves(listener) {

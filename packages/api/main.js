@@ -18,11 +18,7 @@ const server = http.createServer(app);
 const wss = new ws.Server({ server });
 
 wss.on('connection', (ws) => {
-    console.log("Cliente connect to websocket");
-    // ws.on('message', (message) => {
-        // ws.send("hello world");
-    // });
-    // ws.send("Hi, Hello world");
+    console.log("Client connected to websocket");
     WebSocketService.addSocket(ws);
 })
 
@@ -36,7 +32,7 @@ app.get('/create', (req, res) => {
     DatService.createBoard().then(dat => {
         const myKey = DatService.getLocalKey();
         GameService.clearBoard();
-        res.send({"key": myKey.toString('hex')});
+        res.send({"key": myKey});
     });
 });
 
@@ -46,7 +42,7 @@ app.get('/join', async (req, res) => {
     await DatService.loadOponentBoard(`dat://${oponentDatKey}`);
 
     DatService.listenToOponentMoves(EventService.handleOponentMove);
-    GameService.SetUpSeqNum(DatService.getLocalKey().toString('hex')<oponentDatKey);
+    GameService.SetUpSeqNum(DatService.getLocalKey()<oponentDatKey);
     res.send({"status": "ok"});
 });
 
@@ -70,12 +66,11 @@ app.get('/watch', async (req, res) => {
 });
 
 app.get('/sharing', async (req,res) => {
-    const opponentKey = DatService.getOpponentKey().toString('hex');
-    const localKey = DatService.getLocalKey().toString('hex');
+    const opponentKey = DatService.getOpponentKey();
+    const localKey = DatService.getLocalKey();
     const shareKey = await encodeUtils.encodeKeys(localKey, opponentKey);
     
     res.send({"shareKey": shareKey});
 });
 
-// app.listen(PORT, () => console.log(`Dat API listening on port ${PORT}!`))
 server.listen(PORT, () => console.log(`Dat API listening on port ${PORT}!`));
