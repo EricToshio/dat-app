@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import CirclePiece from './CirclePiece';
@@ -57,10 +57,10 @@ const TicTacToeGrid = (props) => {
     var numX = 0;
     var numO = 0;
     for (var pos in props.board){
-      if (props.board[pos] == "X"){
+      if (props.board[pos] === "X"){
         numX = numX + 1
       }
-      if (props.board[pos] == "O"){
+      if (props.board[pos] === "O"){
         numO = numO + 1
       }
     }

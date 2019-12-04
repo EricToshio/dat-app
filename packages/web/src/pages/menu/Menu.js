@@ -69,10 +69,6 @@ const Menu = (props) => {
     setMenuCollapsed(true);
   }
 
-  const inflateMenu = () => {
-    setMenuCollapsed(false);
-  }
-
   const onClickStart = (opponentKey) => {
     props.startButtonClicked(opponentKey);
   }

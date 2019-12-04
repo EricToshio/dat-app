@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Menu from './menu/Menu';
 import Playground from './playground/Playground';
 import {
@@ -14,8 +13,6 @@ import {
   setWatchMode,
   setShareKey,
 } from '../store/actions';
-
-const useStyles = makeStyles(theme => ({}));
 
 const Hero = (props) => {
   const [page, setPage] = useState('menu');

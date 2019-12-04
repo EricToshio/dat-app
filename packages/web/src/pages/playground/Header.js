@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import MenuButton from '../../components/MenuButton';
 import Button from '@material-ui/core/Button';
 import CopyToClipboard from '../../components/CopyToClipboard';
 import TextField from '@material-ui/core/TextField';

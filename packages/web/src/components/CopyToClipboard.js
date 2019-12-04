@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import copy from 'clipboard-copy';
-import Tooltip, { TooltipProps } from '@material-ui/core/Tooltip';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const CopyToClipboard = (props) => {
   const [showTooltip, setShowTooltip] = useState(false);

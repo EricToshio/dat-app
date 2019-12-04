@@ -43,13 +43,14 @@ const Playground = (props) => {
       console.log("WebSocket disconnected");
       setSocket(new WebSocket(WS_URL));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onPlayerMove = async (move) => {
     
     const { position, piece } = move;
     const resp = await makeMove(position, piece);
-    if (resp.status == "ok"){
+    if (resp.status === "ok"){
       props.changeBoardState(move);
       setReload((reload + 1) % 2);
     }else{
