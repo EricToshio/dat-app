@@ -2,6 +2,7 @@ const DatService = require('./services/dat.service');
 const GameService = require('./services/game.service');
 const EventService = require('./services/events.service');
 const WebSocketService =require('./services/websocket.service');
+const encodeUtils = require ('./utils/encode.utils');
 
 const cors = require('cors');
 const express = require('express');
@@ -39,18 +40,41 @@ app.get('/create', (req, res) => {
     });
 });
 
-app.get('/join', (req, res) => {
+app.get('/join', async (req, res) => {
     const oponentDatKey = req.query.key;
-    DatService.loadOponentBoard(`dat://${oponentDatKey}`).then(_ => {
-        DatService.listenToOponentMoves(EventService.handleOponentMove);
-        GameService.SetUpSeqNum(DatService.getLocalKey().toString('hex')<oponentDatKey);
-        res.send({"status": "ok"});
-    });
+
+    await DatService.loadOponentBoard(`dat://${oponentDatKey}`);
+
+    DatService.listenToOponentMoves(EventService.handleOponentMove);
+    GameService.SetUpSeqNum(DatService.getLocalKey().toString('hex')<oponentDatKey);
+    res.send({"status": "ok"});
 });
 
 app.get('/make_move', async (req, res) => {
     const result = await GameService.makeMove(req.query.position, req.query.piece);
     res.send({"status": result});
+});
+
+app.get('/watch', async (req, res) => {
+    const shareKey = req.query.key;
+    const { datKey1, datKey2 } = await encodeUtils.decodeKeys(shareKey);
+
+    await Promise.all([
+        DatService.loadWatchBoard1(`dat://${datKey1}`),
+        DatService.loadWatchBoard2(`dat://${datKey2}`),
+    ]);
+    DatService.listenToWatchMoves1(EventService.handleWatchMove);
+    DatService.listenToWatchMoves2(EventService.handleWatchMove);
+
+    res.send({"status": "ok"});
+});
+
+app.get('/sharing', async (req,res) => {
+    const opponentKey = DatService.getOpponentKey().toString('hex');
+    const localKey = DatService.getLocalKey().toString('hex');
+    const shareKey = await encodeUtils.encodeKeys(localKey, opponentKey);
+    
+    res.send({"shareKey": shareKey});
 });
 
 // app.listen(PORT, () => console.log(`Dat API listening on port ${PORT}!`))

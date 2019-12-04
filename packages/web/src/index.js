@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import todo from './store/reducers';
+import gameState from './store/reducers';
 import 'typeface-roboto';
 import './index.css';
 import Hero from './pages/Hero';
 // import * as serviceWorker from './serviceWorker';
 
-const store = createStore(todo)
+const store = createStore(gameState)
 
 ReactDOM.render(
     <Provider store={store}>

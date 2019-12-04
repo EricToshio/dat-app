@@ -32,18 +32,15 @@ const Playground = (props) => {
   const [socket, setSocket] = useState(new WebSocket(WS_URL));
 
   useEffect(() => {
-    console.log("chamou essa parada");
     socket.onopen = () => {
       console.log("Front-end app connected to server websocket");
     };
     socket.onmessage = evt => {
-      // console.log("recebi alguma coisa", JSON.parse(evt.data));
-      console.log("onmessage", evt.data);
       props.loadBoard(JSON.parse(evt.data));
       setReload((reload + 1) % 2);
     };
     socket.onclose = () => {
-      console.log("desconectou");
+      console.log("WebSocket disconnected");
       setSocket(new WebSocket(WS_URL));
     }
   }, []);

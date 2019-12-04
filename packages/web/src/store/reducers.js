@@ -3,6 +3,8 @@ import {
   STORE_MY_KEY,
   STORE_OPPONENT_KEY,
   LOAD_BOARD,
+  SET_WATCH_MODE,
+  SET_SHARE_KEY,
 } from './actions'
 
 const initialState = {
@@ -19,9 +21,11 @@ const initialState = {
   },
   myKey: null,
   opponentKey: null,
+  isWatchMode: false,
+  shareKey: null,
 }
 
-function todos(state = initialState, action) {
+function gameState(state = initialState, action) {
   switch (action.type) {
     case CHANGE_BOARD_STATE:
       const { position, piece } = action.payload;
@@ -49,10 +53,22 @@ function todos(state = initialState, action) {
         ...state,
         board: action.payload.board,
       }
+    
+    case SET_WATCH_MODE:
+      return {
+        ...state,
+        isWatchMode: action.payload,
+      }
+    
+    case SET_SHARE_KEY:
+      return {
+        ...state,
+        shareKey: action.payload,
+      }
       
     default:
       return state
   }
 }
 
-export default todos
+export default gameState

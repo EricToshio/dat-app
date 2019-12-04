@@ -5,6 +5,10 @@ class EventService {
         console.log("Oponent made a change.");
         GameService.oponentMadeMove();
     }
+    static handleWatchMove() {
+        console.log("Someone made a change.");
+        GameService.watchMadeMove();
+    }
 }
 
 module.exports = EventService;

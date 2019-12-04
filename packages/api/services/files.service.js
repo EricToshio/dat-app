@@ -18,6 +18,32 @@ class FileManipulator {
         });
     }
 
+    static readWatchBoard1() {
+        if(!DatService.watchDat1){
+            console.log("Dat file for oponent doesn't exist. FileManipulator is unable to read.")
+            return;
+        }
+        return new Promise(resolve => {
+            const watchDat1 = DatService.watchDat1;
+            watchDat1.archive.readFile(OPONENT_BOARD_PATH, function (err, content) {
+                resolve(JSON.parse(content));
+            });
+        });
+    }
+
+    static readWatchBoard2() {
+        if(!DatService.watchDat2){
+            console.log("Dat file for oponent doesn't exist. FileManipulator is unable to read.")
+            return;
+        }
+        return new Promise(resolve => {
+            const watchDat2 = DatService.watchDat2;
+            watchDat2.archive.readFile(OPONENT_BOARD_PATH, function (err, content) {
+                resolve(JSON.parse(content));
+            });
+        });
+    }
+
     static writeBoard(newBoard) {
         const newBoardString = JSON.stringify(newBoard);
         fs.writeFile(BOARD_PATH, newBoardString, function(err) {
@@ -33,23 +59,6 @@ class FileManipulator {
             });
         });
     }
-
-    // static async getMergedBoards() {
-    //     return new Promise(resolve => {
-    //         const myBoard = await FileManipulator.readBoard();
-    //         const oponentBoard = await FileManipulator.readOponentBoard();
-    //         const mergedBoard = {"board":{}};
-    //         ['1','2','3','4','5','6','7','8','9'].forEach(key => {
-    //             if(myBoard["board"][key] === '' && oponentBoard["board"][key] === '')
-    //                 mergedBoard["board"][key] = '';
-    //             else if(myBoard["board"][key] !== '')
-    //                 mergedBoard["board"][key] = myBoard["board"][key];
-    //             else
-    //                 mergedBoard["board"][key] = oponentBoard["board"][key];
-    //         });
-    //         resolve(mergedBoard);
-    //     });
-    // }
 }
 
 module.exports = FileManipulator;

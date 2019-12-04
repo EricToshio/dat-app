@@ -41,12 +41,15 @@ const useStyles = makeStyles(theme => ({
 
 const WatchPage = (props) => {
   const classes = useStyles();
+  const [shareKey, setShareKey] = useState("");
 
   const handleChange = (e) => {
     const value = e.target.value;
+    setShareKey(value);
   }
 
   const onClick = () => {
+    props.onClickWatch(shareKey);
   }
 
   return (

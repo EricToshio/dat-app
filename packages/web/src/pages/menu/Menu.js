@@ -44,14 +44,11 @@ const useStyles = makeStyles(theme => ({
 const Menu = (props) => {
   const classes = useStyles();
   const [playClicked, setPlayClicked] = useState(false);
-  const [joinClicked, setJoinClicked] = useState(false);
   const [watchClicked, setWatchClicked] = useState(false);
-  const [key, setKey] = useState("");
   const [isMenuCollapsed, setMenuCollapsed] = useState(false);
 
   const resetStates = () => {
     setPlayClicked(false);
-    setJoinClicked(false);
     setWatchClicked(false);
   }
 
@@ -78,6 +75,10 @@ const Menu = (props) => {
 
   const onClickStart = (opponentKey) => {
     props.startButtonClicked(opponentKey);
+  }
+
+  const onClickWatchKeys = (shareKey) => {
+    props.watchButtonClicked(shareKey);
   }
 
   return (
@@ -116,7 +117,7 @@ const Menu = (props) => {
         >
           
           {playClicked && <CreatePage onClickStart={onClickStart} />}
-          {watchClicked && <WatchPage />}
+          {watchClicked && <WatchPage onClickWatch={onClickWatchKeys} />}
         </div>
       </div>
     </>

@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuButton from '../../components/MenuButton';
+import Button from '@material-ui/core/Button';
+import CopyToClipboard from '../../components/CopyToClipboard';
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -16,13 +20,40 @@ const useStyles = makeStyles(theme => ({
 
 const Header = (props) => {
   const classes = useStyles();
+  const { shareKey } = props;
+
   return (
     <div className={classes.root}>
-      <MenuButton>
-        share match
-      </MenuButton>
+      <CopyToClipboard>
+        {({ copy }) => (
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.button}
+            onClick={() => copy(shareKey)}
+          >
+            Copy
+          </Button>
+        )}
+      </CopyToClipboard>
+      <TextField
+        label=""
+        variant="outlined"
+        value={shareKey}
+        disabled
+        className={classes.textField}
+      />
     </div>
   );
 };
 
-export default Header;
+
+const mapStateToProps = state => {
+  return {
+    shareKey: state.shareKey,    
+  }
+}
+
+export default connect(
+  mapStateToProps,
+)(Header);
